@@ -1,0 +1,53 @@
+//MC_MC_Project_TrafficLight.ucf
+
+NET "ResetN" LOC = "P57";	#RESET_N
+
+#NET "Clock" LOC = "P76";	#CLK_1kHz
+NET "Clock" LOC = "P79";	#CLK_1MHz
+
+#PIEZO
+NET "PIEZO" LOC = "P51";	#PIEZO
+
+#LCD
+NET "LCD_RS" LOC = "P156";		#CLCD_RS
+NET "LCD_RW" LOC = "P155";		#CLCD_RW
+NET "LCD_E" LOC = "p154";		#CLCD_E
+
+NET "LCD_DATA[7]" LOC = "P143";	#CLCD_D[7]
+NET "LCD_DATA[6]" LOC = "P144";	#CLCD_D[6]
+NET "LCD_DATA[5]" LOC = "P146";	#CLCD_D[5]
+NET "LCD_DATA[4]" LOC = "P147";	#CLCD_D[4]
+NET "LCD_DATA[3]" LOC = "P148";	#CLCD_D[3]
+NET "LCD_DATA[2]" LOC = "P149";	#CLCD_D[2]
+NET "LCD_DATA[1]" LOC = "P150";	#CLCD_D[1]
+NET "LCD_DATA[0]" LOC = "P152";	#CLCD_D[0]
+
+#7Segment
+NET "SEG_DATA[6]" LOC = "P176";	#FND_a
+NET "SEG_DATA[5]" LOC = "P178";	#FND_b
+NET "SEG_DATA[4]" LOC = "P181";	#FND_c
+NET "SEG_DATA[3]" LOC = "P182";	#FND_d
+NET "SEG_DATA[2]" LOC = "P184";	#FND_e
+NET "SEG_DATA[1]" LOC = "P185";	#FND_f
+NET "SEG_DATA[0]" LOC = "P187";	#FND_g
+
+#Pedestrian Traffic Light
+NET "PTL_A[0]" LOC = "P191"; #LED 1
+NET "PTL_B[0]" LOC = "P200"; #LED 4
+NET "POS_LED" LOC = "P204"; #LED 5
+NET "PTL_C[0]" LOC = "P15"; #LED 8
+
+NET "PTL_A[1]" LOC = "P190"; #LED 9
+NET "PTL_B[1]" LOC = "P199"; #LED 12
+NET "PTL_C[1]" LOC = "P16"; #LED 16
+
+#NET "ButtonSwitch[7]" LOC = "P63";	#BUTTON_SW1
+NET "POS" LOC = "P67";	#BUTTON_SW2
+#NET "ButtonSwitch[5]" LOC = "P65";	#BUTTON_SW3
+#NET "ButtonSwitch[4]" LOC = "P71";	#BUTTON_SW4
+#NET "ButtonSwitch[3]" LOC = "P68";	#BUTTON_SW5
+#NET "ButtonSwitch[2]" LOC = "P74";	#BUTTON_SW6
+#NET "ButtonSwitch[1]" LOC = "P50";	#BUTTON_SW7
+#NET "ButtonSwitch[0]" LOC = "P58";	#BUTTON_SW8
+
+//NET "ResetN" CLOCK_DEDICATED_ROUTE = FALSE;

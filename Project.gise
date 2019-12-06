@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<generated_project xmlns="http://www.xilinx.com/XMLSchema" xmlns:xil_pn="http://www.xilinx.com/XMLSchema">
+
+  <!--                                                          -->
+
+  <!--             For tool use only. Do not edit.              -->
+
+  <!--                                                          -->
+
+  <!-- ProjectNavigator created generated project file.         -->
+
+  <!-- For use in tracking generated file and other information -->
+
+  <!-- allowing preservation of process status.                 -->
+
+  <!--                                                          -->
+
+  <!-- Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved. -->
+
+  <version xmlns="http://www.xilinx.com/XMLSchema">11.1</version>
+
+  <sourceproject xmlns="http://www.xilinx.com/XMLSchema" xil_pn:fileType="FILE_XISE" xil_pn:name="Project.xise"/>
+
+  <files xmlns="http://www.xilinx.com/XMLSchema">
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGDBUILD_LOG" xil_pn:name="MC_MC_Project_TrafficLight.bld"/>
+    <file xil_pn:fileType="FILE_CMD_LOG" xil_pn:name="MC_MC_Project_TrafficLight.cmd_log"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_LSO" xil_pn:name="MC_MC_Project_TrafficLight.lso"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NCD" xil_pn:name="MC_MC_Project_TrafficLight.ncd" xil_pn:subbranch="Par"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGC" xil_pn:name="MC_MC_Project_TrafficLight.ngc"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGD" xil_pn:name="MC_MC_Project_TrafficLight.ngd"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGR" xil_pn:name="MC_MC_Project_TrafficLight.ngr"/>
+    <file xil_pn:fileType="FILE_PAD_MISC" xil_pn:name="MC_MC_Project_TrafficLight.pad"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_PAR_REPORT" xil_pn:name="MC_MC_Project_TrafficLight.par" xil_pn:subbranch="Par"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_PCF" xil_pn:name="MC_MC_Project_TrafficLight.pcf" xil_pn:subbranch="Map"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="MC_MC_Project_TrafficLight.prj"/>
+    <file xil_pn:fileType="FILE_TRCE_MISC" xil_pn:name="MC_MC_Project_TrafficLight.ptwx"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_STX" xil_pn:name="MC_MC_Project_TrafficLight.stx"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_REPORT" xil_pn:name="MC_MC_Project_TrafficLight.syr"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_TIMING_TXT_REPORT" xil_pn:name="MC_MC_Project_TrafficLight.twr" xil_pn:subbranch="Par"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_TIMING_XML_REPORT" xil_pn:name="MC_MC_Project_TrafficLight.twx" xil_pn:subbranch="Par"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_UNROUTES" xil_pn:name="MC_MC_Project_TrafficLight.unroutes" xil_pn:subbranch="Par"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_BITGEN_REPORT" xil_pn:name="MC_MC_Project_TrafficLight.ut" xil_pn:subbranch="FPGAConfiguration"/>
+    <file xil_pn:fileType="FILE_XPI" xil_pn:name="MC_MC_Project_TrafficLight.xpi"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST" xil_pn:name="MC_MC_Project_TrafficLight.xst"/>
+    <file xil_pn:fileType="FILE_HTML" xil_pn:name="MC_MC_Project_TrafficLight_envsettings.html"/>
+    <file xil_pn:fileType="FILE_NCD" xil_pn:name="MC_MC_Project_TrafficLight_guide.ncd" xil_pn:origination="imported"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_MAP_REPORT" xil_pn:name="MC_MC_Project_TrafficLight_map.map" xil_pn:subbranch="Map"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_MAP_REPORT" xil_pn:name="MC_MC_Project_TrafficLight_map.mrp" xil_pn:subbranch="Map"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NCD" xil_pn:name="MC_MC_Project_TrafficLight_map.ncd" xil_pn:subbranch="Map"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGM" xil_pn:name="MC_MC_Project_TrafficLight_map.ngm" xil_pn:subbranch="Map"/>
+    <file xil_pn:fileType="FILE_XRPT" xil_pn:name="MC_MC_Project_TrafficLight_map.xrpt"/>
+    <file xil_pn:fileType="FILE_XRPT" xil_pn:name="MC_MC_Project_TrafficLight_ngdbuild.xrpt"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_PAD_EXCEL_REPORT" xil_pn:name="MC_MC_Project_TrafficLight_pad.csv" xil_pn:subbranch="Par"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_PAD_TXT_REPORT" xil_pn:name="MC_MC_Project_TrafficLight_pad.txt" xil_pn:subbranch="Par"/>
+    <file xil_pn:fileType="FILE_XRPT" xil_pn:name="MC_MC_Project_TrafficLight_par.xrpt"/>
+    <file xil_pn:fileType="FILE_HTML" xil_pn:name="MC_MC_Project_TrafficLight_summary.html"/>
+    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="MC_MC_Project_TrafficLight_summary.xml"/>
+    <file xil_pn:fileType="FILE_WEBTALK" xil_pn:name="MC_MC_Project_TrafficLight_usage.xml"/>
+    <file xil_pn:fileType="FILE_XRPT" xil_pn:name="MC_MC_Project_TrafficLight_xst.xrpt"/>
+    <file xil_pn:fileType="FILE_CMD" xil_pn:name="_impact.cmd"/>
+    <file xil_pn:fileType="FILE_LOG" xil_pn:name="_impact.log"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="_ngo"/>
+    <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/bitgen.xmsgs"/>
+    <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/map.xmsgs"/>
+    <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/ngdbuild.xmsgs"/>
+    <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/par.xmsgs"/>
+    <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/trce.xmsgs"/>
+    <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/xst.xmsgs"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_BITGEN_REPORT" xil_pn:name="mc_mc_project_trafficlight.bgn" xil_pn:subbranch="FPGAConfiguration"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_BIT" xil_pn:name="mc_mc_project_trafficlight.bit" xil_pn:subbranch="FPGAConfiguration"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_BITGEN_DRC" xil_pn:name="mc_mc_project_trafficlight.drc" xil_pn:subbranch="FPGAConfiguration"/>
+    <file xil_pn:fileType="FILE_HTML" xil_pn:name="usage_statistics_webtalk.html"/>
+    <file xil_pn:fileType="FILE_LOG" xil_pn:name="webtalk.log"/>
+    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="webtalk_pn.xml"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="xlnx_auto_0_xdb"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="xst"/>
+  </files>
+
+  <transforms xmlns="http://www.xilinx.com/XMLSchema">
+    <transform xil_pn:end_ts="1574501253" xil_pn:name="TRAN_copyInitialToXSTAbstractSynthesis" xil_pn:start_ts="1574501253">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1574501253" xil_pn:name="TRAN_schematicsToHdl" xil_pn:prop_ck="-668972641604525606" xil_pn:start_ts="1574501253">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1574501253" xil_pn:name="TRAN_regenerateCores" xil_pn:prop_ck="9010885913624750358" xil_pn:start_ts="1574501253">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1574501253" xil_pn:name="TRAN_SubProjectAbstractToPreProxy" xil_pn:start_ts="1574501253">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1574501253" xil_pn:name="TRAN_xawsTohdl" xil_pn:prop_ck="-5243246481800216286" xil_pn:start_ts="1574501253">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1574501253" xil_pn:name="TRAN_SubProjectPreToStructuralProxy" xil_pn:prop_ck="1110319057739476154" xil_pn:start_ts="1574501253">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1574501253" xil_pn:name="TRAN_platgen" xil_pn:prop_ck="1579008839079664160" xil_pn:start_ts="1574501253">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1575613354" xil_pn:in_ck="2369671890360524418" xil_pn:name="TRANEXT_xstsynthesize_spartan3" xil_pn:prop_ck="-6911056370188068202" xil_pn:start_ts="1575613342">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="OutputChanged"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight.lso"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight.ngc"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight.ngr"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight.prj"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight.stx"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight.syr"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight.xst"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight_xst.xrpt"/>
+      <outfile xil_pn:name="_xmsgs/xst.xmsgs"/>
+      <outfile xil_pn:name="webtalk_pn.xml"/>
+      <outfile xil_pn:name="xst"/>
+    </transform>
+    <transform xil_pn:end_ts="1575613354" xil_pn:in_ck="3570477816495438487" xil_pn:name="TRAN_compileBCD2" xil_pn:prop_ck="8395602563817396941" xil_pn:start_ts="1575613354">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1575613361" xil_pn:in_ck="-2704812132817611864" xil_pn:name="TRANEXT_ngdbuild_FPGA" xil_pn:prop_ck="8170456112293663156" xil_pn:start_ts="1575613354">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight.bld"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight.ngd"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight_ngdbuild.xrpt"/>
+      <outfile xil_pn:name="_ngo"/>
+      <outfile xil_pn:name="_xmsgs/ngdbuild.xmsgs"/>
+    </transform>
+    <transform xil_pn:end_ts="1575613367" xil_pn:in_ck="-3601160418099059863" xil_pn:name="TRANEXT_map_spartan3" xil_pn:prop_ck="6068476255904139836" xil_pn:start_ts="1575613361">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight.pcf"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight_map.map"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight_map.mrp"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight_map.ncd"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight_map.ngm"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight_map.xrpt"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight_summary.xml"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight_usage.xml"/>
+      <outfile xil_pn:name="_xmsgs/map.xmsgs"/>
+    </transform>
+    <transform xil_pn:end_ts="1575613382" xil_pn:in_ck="-6847882634036339262" xil_pn:name="TRANEXT_par_spartan3" xil_pn:prop_ck="3333849164707216606" xil_pn:start_ts="1575613367">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight.ncd"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight.pad"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight.par"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight.ptwx"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight.unroutes"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight.xpi"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight_pad.csv"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight_pad.txt"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight_par.xrpt"/>
+      <outfile xil_pn:name="_xmsgs/par.xmsgs"/>
+    </transform>
+    <transform xil_pn:end_ts="1575613389" xil_pn:in_ck="3570477816495430862" xil_pn:name="TRANEXT_bitFile_spartan3" xil_pn:prop_ck="-2672950586390118423" xil_pn:start_ts="1575613382">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight.ut"/>
+      <outfile xil_pn:name="_xmsgs/bitgen.xmsgs"/>
+      <outfile xil_pn:name="mc_mc_project_trafficlight.bgn"/>
+      <outfile xil_pn:name="mc_mc_project_trafficlight.bit"/>
+      <outfile xil_pn:name="mc_mc_project_trafficlight.drc"/>
+      <outfile xil_pn:name="usage_statistics_webtalk.html"/>
+      <outfile xil_pn:name="webtalk.log"/>
+      <outfile xil_pn:name="webtalk_pn.xml"/>
+    </transform>
+    <transform xil_pn:end_ts="1575613389" xil_pn:in_ck="-2569519605342858376" xil_pn:name="TRAN_impactProgrammingTool" xil_pn:prop_ck="-6864680952955714571" xil_pn:start_ts="1575613389">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="_impact.cmd"/>
+      <outfile xil_pn:name="_impact.log"/>
+    </transform>
+    <transform xil_pn:end_ts="1574746232" xil_pn:in_ck="-2569519605342858376" xil_pn:name="TRAN_genImpactFile" xil_pn:prop_ck="-7052584534157616599" xil_pn:start_ts="1574746229">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="InputChanged"/>
+    </transform>
+    <transform xil_pn:end_ts="1575613382" xil_pn:in_ck="4036348796794766309" xil_pn:name="TRAN_postRouteTrce" xil_pn:prop_ck="445577401284416186" xil_pn:start_ts="1575613379">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight.twr"/>
+      <outfile xil_pn:name="MC_MC_Project_TrafficLight.twx"/>
+      <outfile xil_pn:name="_xmsgs/trce.xmsgs"/>
+    </transform>
+  </transforms>
+
+</generated_project>

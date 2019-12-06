@@ -1,0 +1,6 @@
+MO MC_MC_Project_TrafficLight NULL MC_MC_Project_TrafficLight.v vlg1B/_m_c___m_c___project___traffic_light.bin 1575613345
+MO MC_DigitalClock_Action NULL ../Week10_Lab/MC_DigitalClock_Action.v vlg46/_m_c___digital_clock___action.bin 1574501256
+MO MC_DigitalClock_Separator NULL ../Week10_Lab/MC_DigitalClock_Separator.v vlg79/_m_c___digital_clock___separator.bin 1574501256
+MO MC_VehicleTrafficLight NULL MC_VehicleTrafficLight.v vlg3A/_m_c___vehicle_traffic_light.bin 1575613345
+MO MC_PedestrianTrafficLight NULL MC_PedestrianTrafficLight.v vlg3D/_m_c___pedestrian_traffic_light.bin 1575613345
+MO MC_7SegmnetDecoder_forProject NULL MC_7SegmnetDecoder_forProject.v vlg68/_m_c__7_segmnet_decoder__for_project.bin 1575613345
