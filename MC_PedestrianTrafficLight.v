@@ -1,31 +1,39 @@
 //MC_PedestrianTrafficLight.v
 
-module MC_PedestrianTrafficLight(Clock, CLK_100Hz, ResetN, state, CNT, PTL_A, PTL_B, PTL_C, SEG_DATA, PIEZO, POS, POS_LED, POS_flag);
+module MC_PedestrianTrafficLight(Clock, CLK_100Hz, ResetN, state, CNT, startTimeSec_A, startTimeMin_A, 
+											startTimeSec_B, startTimeMin_B, startTimeSec_C, startTimeMin_C, 
+											PTL_A, PTL_B, PTL_C, SEG_COM, SEG_DATA, PIEZO, PIEZO_onOff, POS, POS_LED, POS_flag);
 	
 	input Clock, CLK_100Hz, ResetN;
 	input [3:0] state;
-	input [8:0] CNT;
+	input [17:0] CNT;
+	input [5:0] startTimeSec_A, startTimeMin_A, startTimeSec_B, startTimeMin_B, startTimeSec_C, startTimeMin_C;
+	input PIEZO_onOff;
 	input POS;
 	
 	output reg [1:0] PTL_A, PTL_B, PTL_C;	//Pedestrian Traffic Light (보행자 신호등)
-	output [6:0] SEG_DATA;	//보행자 신호등 남은 시간
+	output [3:0] SEG_COM;	//보행자 신호등 남은 시간
+	output [7:0] SEG_DATA;		//보행자 신호등 남은 시간
+	//output [6:0] SEG_DATA;	
 	output reg PIEZO;			//for PIEZO
 	output reg POS_LED;
 	output reg POS_flag;	//for state 순서 변경 - c, b, a
 	
-	reg [3:0] secLeft;		//for 7segment, 신호등 남은 시간
-	reg piezoEnable, piezoEnable2;			//for PIEZO, 2: togle 반복용
+	//reg [3:0] secLeft;		//for 7segment, 신호등 남은 시간
+	reg piezoEnable, piezoEnable2, piezoEnable3;			//for PIEZO, 2: togle 반복용
 	reg [10:0] CNT_PIEZO;	//for PIEZO
-	reg [5:0] CNT_PIEZO_ITERATION;	//PIEZO 일정 주기로 togle 반복
+	reg [5:0] CNT_PIEZO_ITERATION;		//PIEZO 일정 주기로 togle 반복
+	reg [2:0] CNT_PIEZO_ITERATION_2;		//PIEZO 일정 주기로 togle 반복
+	reg [6:0] cnt2;	//0~99, for count down
 	
 	parameter	A_STATE	= 4'd5,
 					B_STATE	= 4'd6,
 					C_STATE	= 4'd7;
 	
-	always @(*) begin	/*CNT or negedge ResetN*/
+	always @(posedge Clock) begin	/*CNT or negedge ResetN*/
 		if(!ResetN) begin
 			piezoEnable <= 1'b0;		//for PIEZO
-			secLeft <= 4'b1111;
+			//secLeft <= 4'b1111;
 			PTL_A <= 2'b00;
 			PTL_B <= 2'b00;
 			PTL_C <= 2'b00;
@@ -33,52 +41,77 @@ module MC_PedestrianTrafficLight(Clock, CLK_100Hz, ResetN, state, CNT, PTL_A, PT
 		
 		if(CNT < 99) begin
 			piezoEnable <= 1'b0;		//for PIEZO
-			secLeft <= 4'b1111;		//남은 시간: NULL
+			//secLeft <= 4'b1111;		//남은 시간: NULL
 			PTL_A <= 2'b00;
 			PTL_B <= 2'b00;
 			PTL_C <= 2'b00;
 		end
 		else begin
-			//PIEZO와 남은 시간 표시
-			if(state == A_STATE || state == B_STATE || state == C_STATE) begin
+//			if(state == A_STATE || state == B_STATE || state == C_STATE) begin
+			if(CNT >= 299 && PIEZO_onOff)//300
 				piezoEnable <= 1'b1;
-				secLeft <= /*(secLeft < 99) ? 5 : */(CNT< 199) ? 4'd4 : //신호등 남은 시간
-															((CNT < 299) ? 4'd3 : 
-															((CNT < 399) ? 4'd2 : 
-															((CNT < 499) ? 1 : 4'b1111)));
-			end
-			else begin
+			else
 				piezoEnable <= 1'b0;
-				secLeft <= 4'b1111;
-			end
 			
 			//신호등 Light 표시
-			case(state)
-				A_STATE: begin
-					PTL_A <= 2'b11;
+			if(CNT < 399)		//3초 뒤 toggle
+				case(state)
+					A_STATE: begin
+						PTL_A <= 2'b11;
+						PTL_B <= 2'b00;
+						PTL_C <= 2'b00;
+					end
+					B_STATE: begin
+						PTL_A <= 2'b00;
+						PTL_B <= 2'b11;
+						
+						PTL_C <= 2'b00;
+					end
+					C_STATE:	begin
+						PTL_A <= 2'b00;
+						PTL_B <= 2'b00;
+						PTL_C <= 2'b11;
+					end
+					default: begin
+						PTL_A <= 2'b00;
+						PTL_B <= 2'b00;
+						PTL_C <= 2'b00;
+					end
+				endcase
+			else if(CNT == 400) begin
+					PTL_A <= 2'b00;
 					PTL_B <= 2'b00;
 					PTL_C <= 2'b00;
 				end
-				B_STATE: begin
-					PTL_A <= 2'b00;
-					PTL_B <= 2'b11;
-					PTL_C <= 2'b00;
-				end
-				C_STATE:	begin
-					PTL_A <= 2'b00;
-					PTL_B <= 2'b00;
-					PTL_C <= 2'b11;
-				end
-				default: begin
-					PTL_A <= 2'b00;
-					PTL_B <= 2'b00;
-					PTL_C <= 2'b00;
-				end
-			endcase
+			else begin
+				case(state)
+					A_STATE: begin
+						PTL_A <= (cnt2 >= 7'd49) ? PTL_A ^ 2'b11 : PTL_A;	//Toggle
+						PTL_B <= 2'b00;
+						PTL_C <= 2'b00;
+					end
+					B_STATE: begin
+						PTL_A <= 2'b00;
+						PTL_B <= (cnt2 >= 7'd49) ? PTL_B ^ 2'b11 : PTL_B;	//Toggle
+						PTL_C <= 2'b00;
+					end
+					C_STATE:	begin
+						PTL_A <= 2'b00;
+						PTL_B <= 2'b00;
+						PTL_C <= (cnt2 >= 7'd49) ? PTL_C ^ 2'b11 : PTL_C;	//Toggle
+					end
+					default: begin
+						PTL_A <= 2'b00;
+						PTL_B <= 2'b00;
+						PTL_C <= 2'b00;
+					end
+				endcase
+			end
 		end
 	end
 	
-	always @(posedge CLK_100Hz or negedge ResetN) begin	//pedestrian operation signal, B 신호등에 부착됨, Button swich 2 누르면 LED on
+	//pedestrian operation signal, B 신호등에 부착됨, Button swich 2 누르면 LED on
+	always @(posedge CLK_100Hz or negedge ResetN) begin
 		if(!ResetN) begin
 			POS_LED <= 1'b0;
 			POS_flag <= 1'b0;
@@ -102,9 +135,9 @@ module MC_PedestrianTrafficLight(Clock, CLK_100Hz, ResetN, state, CNT, PTL_A, PT
 			CNT_PIEZO <= 11'd0;
 			PIEZO <= 11'd0;
 		end
-		else if(piezoEnable & piezoEnable2) begin	//C3, ?1,911.127963012794?
-		CNT_PIEZO <= (CNT_PIEZO >= 11'd1910) ? 11'd0 : CNT_PIEZO + 1'b1;
-		PIEZO <= (CNT_PIEZO >= 11'd1910) ? ~PIEZO : PIEZO;
+		else if(piezoEnable & piezoEnable2 & piezoEnable3) begin	//C3, ?1,911.127963012794?
+		CNT_PIEZO <= (CNT_PIEZO >= 11'd477) ? 11'd0 : CNT_PIEZO + 1'b1;//1910//955
+		PIEZO <= (CNT_PIEZO >= 11'd477) ? ~PIEZO : PIEZO;
 		//BCD <= 4'd1;
 		end
 	end
@@ -112,14 +145,36 @@ module MC_PedestrianTrafficLight(Clock, CLK_100Hz, ResetN, state, CNT, PTL_A, PT
 	always @(posedge CLK_100Hz or negedge ResetN) begin
 		if(!ResetN) begin
 			CNT_PIEZO_ITERATION <= 6'd0;
+			CNT_PIEZO_ITERATION_2 <= 6'd0;
 			piezoEnable2 <= 6'd0;
+			piezoEnable3 <= 6'd0;
 		end
 		else if(piezoEnable) begin
-			CNT_PIEZO_ITERATION <= (CNT_PIEZO_ITERATION >= 6'd50) ? 6'd0 : CNT_PIEZO_ITERATION + 1'b1;
-			piezoEnable2 <= (CNT_PIEZO_ITERATION >= 6'd50) ? ~piezoEnable2 : piezoEnable2;
+			CNT_PIEZO_ITERATION <= (CNT_PIEZO_ITERATION >= 6'd49) ? 6'd0 : CNT_PIEZO_ITERATION + 1'b1;
+			piezoEnable2 <= (CNT_PIEZO_ITERATION >= 6'd49) ? ~piezoEnable2 : piezoEnable2;
+			CNT_PIEZO_ITERATION_2 <= (CNT_PIEZO_ITERATION_2 >= 3'd4) ? 3'd0 : CNT_PIEZO_ITERATION_2 + 1'b1;
+			piezoEnable3 <= (CNT_PIEZO_ITERATION_2 >= 3'd4) ? ~piezoEnable3 : piezoEnable3;
+		end
+		else begin
+			CNT_PIEZO_ITERATION <= 6'd0;
+			CNT_PIEZO_ITERATION_2 <= 6'd0;
 		end
 	end
 	
-	MC_7SegmnetDecoder_forProject M3(.BCD(secLeft), .SEG_DATA(SEG_DATA));
+	//0~99 count
+	always @(posedge CLK_100Hz or negedge ResetN) begin
+		if(!ResetN)
+			cnt2 <= 7'd0;
+		else if(CNT == 9'd0)
+			cnt2 <= 7'd0;
+		else
+			cnt2 <= (cnt2 >= 7'd99) ? 0 : cnt2 + 7'd1;
+	end
+	
+	MC_DigitalClock_forProject countDown(.Clock(Clock), .CLK_100Hz(CLK_100Hz), .cnt(CNT), .cnt2(cnt2), .ResetN(ResetN), .state(state), .SEG_COM(SEG_COM), .SEG_DATA(SEG_DATA), 
+												.startTimeSec_A(startTimeSec_A), .startTimeMin_A(startTimeMin_A), .startTimeSec_B(startTimeSec_B), .startTimeMin_B(startTimeMin_B), 
+												.startTimeSec_C(startTimeSec_C), .startTimeMin_C(startTimeMin_C));
+	
+	//MC_7SegmentDecoder_forProject_2 M3(.BCD(secLeft), .dot(), .SEG_DATA(SEG_DATA));
 	
 endmodule
