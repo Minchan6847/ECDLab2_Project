@@ -1,8 +1,0 @@
-INTSTYLE=ise
-INFILE=C:\Xilinx_Projects\Project\MC_MC_Project_TrafficLight.ncd
-OUTFILE=C:\Xilinx_Projects\Project\MC_MC_Project_TrafficLight.bit
-FAMILY=Spartan3
-PART=xc3s200-4pq208
-WORKINGDIR=C:\Xilinx_Projects\Project
-LICENSE=WebPack
-USER_INFO=211799608_0_0_956
