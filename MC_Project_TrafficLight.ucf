@@ -2,7 +2,6 @@
 
 NET "ResetN" LOC = "P57";	#RESET_N
 
-#NET "Clock" LOC = "P76";	#CLK_1kHz
 NET "Clock" LOC = "P79";	#CLK_1MHz
 
 #PIEZO

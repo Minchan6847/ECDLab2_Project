@@ -30,7 +30,7 @@ module MC_PedestrianTrafficLight(Clock, CLK_100Hz, ResetN, state, CNT, startTime
 					B_STATE	= 4'd6,
 					C_STATE	= 4'd7;
 	
-	always @(posedge Clock) begin	/*CNT or negedge ResetN*/
+	always @(posedge CLK_100Hz) begin	/*CNT or negedge ResetN*/
 		if(!ResetN) begin
 			piezoEnable <= 1'b0;		//for PIEZO
 			//secLeft <= 4'b1111;
@@ -39,74 +39,109 @@ module MC_PedestrianTrafficLight(Clock, CLK_100Hz, ResetN, state, CNT, startTime
 			PTL_C <= 2'b00;
 		end
 		
-		if(CNT < 99) begin
-			piezoEnable <= 1'b0;		//for PIEZO
-			//secLeft <= 4'b1111;		//남은 시간: NULL
+		if(state == A_STATE || state == B_STATE || state == C_STATE) begin
+			if(CNT < 99) begin
+				piezoEnable <= 1'b0;		//for PIEZO
+				//secLeft <= 4'b1111;		//남은 시간: NULL
+				PTL_A <= 2'b01;//00
+				PTL_B <= 2'b01;//00
+				PTL_C <= 2'b01;//00
+			end
+			else begin
+	//			if(state == A_STATE || state == B_STATE || state == C_STATE) begin
+				if(CNT >= 299 && PIEZO_onOff)//300
+					piezoEnable <= 1'b1;
+				else
+					piezoEnable <= 1'b0;
+				
+				//신호등 Light 표시
+				if(CNT < 299)		//3초 뒤 toggle
+					case(state)
+						A_STATE: begin
+							PTL_A <= 2'b10;//11
+							PTL_B <= 2'b01;//00
+							PTL_C <= 2'b01;//00
+						end
+						B_STATE: begin
+							PTL_A <= 2'b01;//00
+							PTL_B <= 2'b10;//11
+							PTL_C <= 2'b01;//00
+						end
+						C_STATE:	begin
+							PTL_A <= 2'b01;//00
+							PTL_B <= 2'b01;//00
+							PTL_C <= 2'b10;//11
+						end
+						default: begin
+							PTL_A <= 2'b01;//00
+							PTL_B <= 2'b01;//00
+							PTL_C <= 2'b01;//00
+						end
+					endcase
+/*				else if(CNT == 400) begin
+					//PTL_A <= 2'b00;
+					//PTL_B <= 2'b00;
+					//PTL_C <= 2'b00;
+					case(state)
+						A_STATE: begin
+							PTL_A <= 2'b00;
+							PTL_B <= 2'b01;//00
+							PTL_C <= 2'b01;//00
+						end
+						B_STATE: begin
+							PTL_A <= 2'b01;//00
+							PTL_B <= 2'b00;//11
+							PTL_C <= 2'b01;//00
+						end
+						C_STATE:	begin
+							PTL_A <= 2'b01;//00
+							PTL_B <= 2'b01;//00
+							PTL_C <= 2'b00;//11
+						end
+						default: begin
+							PTL_A <= 2'b01;//00
+							PTL_B <= 2'b01;//00
+							PTL_C <= 2'b01;//00
+						end
+					endcase
+				end*/
+				else begin
+					case(state)
+						A_STATE: begin
+							//PTL_A <= (cnt2 >= 7'd49) ? PTL_A ^ 2'b11 : PTL_A;	//Toggle
+							PTL_A[0] <=1'b0;
+							PTL_A[1] <= (cnt2 == 7'd00 || cnt2 == 7'd50) ? PTL_A[1] ^ 1'b1 : PTL_A[1];	//Toggle
+							PTL_B <= 2'b01;//00
+							PTL_C <= 2'b01;//00
+						end
+						B_STATE: begin
+							PTL_A <= 2'b01;//00
+							//PTL_B <= (cnt2 >= 7'd49) ? PTL_B ^ 2'b11 : PTL_B;	//Toggle
+							PTL_B[0] <=1'b0;
+							PTL_B[1] <= (cnt2 == 7'd00 || cnt2 == 7'd50) ? PTL_B[1] ^ 1'b1 : PTL_B[1];	//Toggle
+							PTL_C <= 2'b01;//00
+						end
+						C_STATE:	begin
+							PTL_A <= 2'b01;//00
+							PTL_B <= 2'b01;//00
+							//PTL_C <= (cnt2 >= 7'd49) ? PTL_C ^ 2'b11 : PTL_C;	//Toggle
+							PTL_C[0] <=1'b0;
+							PTL_C[1] <= (cnt2 == 7'd00 || cnt2 == 7'd50) ? PTL_C[1] ^ 1'b1 : PTL_C[1];	//Toggle
+						end
+						default: begin
+							PTL_A <= 2'b01;//00
+							PTL_B <= 2'b01;//00
+							PTL_C <= 2'b01;//00
+						end
+					endcase
+				end
+			end
+		end
+		else begin
 			PTL_A <= 2'b00;
 			PTL_B <= 2'b00;
 			PTL_C <= 2'b00;
-		end
-		else begin
-//			if(state == A_STATE || state == B_STATE || state == C_STATE) begin
-			if(CNT >= 299 && PIEZO_onOff)//300
-				piezoEnable <= 1'b1;
-			else
-				piezoEnable <= 1'b0;
-			
-			//신호등 Light 표시
-			if(CNT < 399)		//3초 뒤 toggle
-				case(state)
-					A_STATE: begin
-						PTL_A <= 2'b11;
-						PTL_B <= 2'b00;
-						PTL_C <= 2'b00;
-					end
-					B_STATE: begin
-						PTL_A <= 2'b00;
-						PTL_B <= 2'b11;
-						
-						PTL_C <= 2'b00;
-					end
-					C_STATE:	begin
-						PTL_A <= 2'b00;
-						PTL_B <= 2'b00;
-						PTL_C <= 2'b11;
-					end
-					default: begin
-						PTL_A <= 2'b00;
-						PTL_B <= 2'b00;
-						PTL_C <= 2'b00;
-					end
-				endcase
-			else if(CNT == 400) begin
-					PTL_A <= 2'b00;
-					PTL_B <= 2'b00;
-					PTL_C <= 2'b00;
-				end
-			else begin
-				case(state)
-					A_STATE: begin
-						PTL_A <= (cnt2 >= 7'd49) ? PTL_A ^ 2'b11 : PTL_A;	//Toggle
-						PTL_B <= 2'b00;
-						PTL_C <= 2'b00;
-					end
-					B_STATE: begin
-						PTL_A <= 2'b00;
-						PTL_B <= (cnt2 >= 7'd49) ? PTL_B ^ 2'b11 : PTL_B;	//Toggle
-						PTL_C <= 2'b00;
-					end
-					C_STATE:	begin
-						PTL_A <= 2'b00;
-						PTL_B <= 2'b00;
-						PTL_C <= (cnt2 >= 7'd49) ? PTL_C ^ 2'b11 : PTL_C;	//Toggle
-					end
-					default: begin
-						PTL_A <= 2'b00;
-						PTL_B <= 2'b00;
-						PTL_C <= 2'b00;
-					end
-				endcase
-			end
+			piezoEnable <= 1'b0;
 		end
 	end
 	

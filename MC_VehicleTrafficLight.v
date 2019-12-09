@@ -1,10 +1,10 @@
 //MC_VehicleTrafficLight.v
 
-module MC_VehicleTrafficLight(CLK_100Hz, ResetN, LCD_E, LCD_RS, LCD_RW, LCD_DATA, state, CNT, startTimeSec_A, startTimeMin_A, 
+module MC_VehicleTrafficLight(CLK_100Hz, Clock, ResetN, LCD_E, LCD_RS, LCD_RW, LCD_DATA, state, CNT, startTimeSec_A, startTimeMin_A, 
 										startTimeSec_B, startTimeMin_B, startTimeSec_C, startTimeMin_C, 
 										startTimeMultiply100_A, startTimeMultiply100_B, startTimeMultiply100_C, select);
 	
-	input CLK_100Hz, ResetN;
+	input CLK_100Hz, Clock, ResetN;
 	input [3:0] state;
 	input [17:0] CNT;
 	input [5:0] startTimeSec_A, startTimeMin_A, startTimeSec_B, startTimeMin_B, startTimeSec_C, startTimeMin_C;	//신호등 count down 시작 시간
@@ -51,7 +51,7 @@ module MC_VehicleTrafficLight(CLK_100Hz, ResetN, LCD_E, LCD_RS, LCD_RW, LCD_DATA
 	assign startTimeMultiply100Minus100_B = startTimeMultiply100_B - 18'd100;
 	assign startTimeMultiply100Minus100_C = startTimeMultiply100_C - 18'd100;
 	
-	always @(posedge CLK_100Hz or negedge ResetN) begin
+	always @(posedge Clock or negedge ResetN) begin
 		if(!ResetN) begin
 			LCD_RS <= 1'b1;
 			LCD_RW <= 1'b1;

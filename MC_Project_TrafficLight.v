@@ -165,7 +165,7 @@ module MC_Project_TrafficLight(Clock, ResetN,
 	MC_AdjustInitialTime AIT(Clock, ResetN, startTimeSec_A, startTimeMin_A, startTimeSec_B, startTimeMin_B, 
 										startTimeSec_C, startTimeMin_C, startTimeMultiply100_A, startTimeMultiply100_B, startTimeMultiply100_C, 
 										STsecUp, STsecDown, STminUp, STminDown, select);
-	MC_VehicleTrafficLight VTL(CLK_100Hz, ResetN, LCD_E, LCD_RS, LCD_RW, LCD_DATA, state, CNT, startTimeSec_A, startTimeMin_A, 
+	MC_VehicleTrafficLight VTL(CLK_100Hz, Clock, ResetN, LCD_E, LCD_RS, LCD_RW, LCD_DATA, state, CNT, startTimeSec_A, startTimeMin_A, 
 										startTimeSec_B, startTimeMin_B, startTimeSec_C, startTimeMin_C, startTimeMultiply100_A, startTimeMultiply100_B, startTimeMultiply100_C, select);
 	MC_PedestrianTrafficLight PTL(Clock, CLK_100Hz, ResetN, state, CNT, startTimeSec_A, startTimeMin_A, 
 											startTimeSec_B, startTimeMin_B, startTimeSec_C, startTimeMin_C, PTL_A, PTL_B, PTL_C, SEG_COM, SEG_DATA, PIEZO, PIEZO_onOff, POS, POS_LED, POS_flag);
