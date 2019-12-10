@@ -35,7 +35,7 @@ module MC_Project_TrafficLight(Clock, ResetN,
 					ALL_RED	 		= 4'd10,			//for ¡°∏Í Ω≈»£
 					EXTINGUISH_ALL_O	= 4'd11,		//for ¡°∏Í Ω≈»£
 					EXTINGUISH_ALL_R	= 4'd12,		//for ¡°∏Í Ω≈»£
-					EXTINGUISH_ALL_A	= 4'd13;		//for mode
+					EXTINGUISH_ALL_A	= 4'd13;		//for mode, mode2
 					
 	reg [3:0] state;
 	reg CLK_100Hz;
