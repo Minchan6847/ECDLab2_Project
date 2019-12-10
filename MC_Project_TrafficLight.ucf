@@ -67,6 +67,7 @@ NET "mode" LOC = "P34";					#BUS_SW1
 NET "orangeFlickering" LOC = "P35";	#BUS_SW2
 NET "redFlickering" LOC = "P37";		#BUS_SW3
 NET "PIEZO_onOff" LOC = "P40";		#BUS_SW5
+NET "mode2" LOC = "P39";		#BUS_SW6
 NET "select[1]" LOC = "P43";			#BUS_SW7
 NET "select[0]" LOC = "P42";			#BUS_SW8
 

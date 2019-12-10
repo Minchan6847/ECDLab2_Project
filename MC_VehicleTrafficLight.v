@@ -2,12 +2,14 @@
 
 module MC_VehicleTrafficLight(CLK_100Hz, Clock, ResetN, LCD_E, LCD_RS, LCD_RW, LCD_DATA, state, CNT, startTimeSec_A, startTimeMin_A, 
 										startTimeSec_B, startTimeMin_B, startTimeSec_C, startTimeMin_C, 
-										startTimeMultiply100_A, startTimeMultiply100_B, startTimeMultiply100_C, select);
+										startTimeMultiply100_A, startTimeMultiply100_B, startTimeMultiply100_C, select, mode, mode2, 
+										blinkStartTimeSec_A, blinkStartTimeMin_A, blinkStartTimeSec_B, blinkStartTimeMin_B, blinkStartTimeSec_C, blinkStartTimeMin_C);
 	
-	input CLK_100Hz, Clock, ResetN;
+	input CLK_100Hz, Clock, ResetN, mode, mode2;
 	input [3:0] state;
 	input [17:0] CNT;
-	input [5:0] startTimeSec_A, startTimeMin_A, startTimeSec_B, startTimeMin_B, startTimeSec_C, startTimeMin_C;	//신호등 count down 시작 시간
+	input [5:0] startTimeSec_A, startTimeMin_A, startTimeSec_B, startTimeMin_B, startTimeSec_C, startTimeMin_C, 
+					blinkStartTimeSec_A, blinkStartTimeMin_A, blinkStartTimeSec_B, blinkStartTimeMin_B, blinkStartTimeSec_C, blinkStartTimeMin_C;	//신호등 count down 시작 시간
 	input [17:0] startTimeMultiply100_A, startTimeMultiply100_B, startTimeMultiply100_C;
 	input [1:0] select;
 	
@@ -1256,24 +1258,46 @@ module MC_VehicleTrafficLight(CLK_100Hz, Clock, ResetN, LCD_E, LCD_RS, LCD_RW, L
 	end
 	
 	always @(posedge CLK_100Hz) begin
-		case(select)
-			2'b00: begin
-				startTimeSecTemp <= startTimeSec_A;
-				startTimeMinTemp <= startTimeMin_A;
-			end
-			2'b01: begin
-				startTimeSecTemp <= startTimeSec_B;
-				startTimeMinTemp <= startTimeMin_B;
-			end
-			2'b10: begin
-				startTimeSecTemp <= startTimeSec_C;
-				startTimeMinTemp <= startTimeMin_C;
-			end
-			default: begin
-				startTimeSecTemp <= startTimeSec_A;
-				startTimeMinTemp <= startTimeMin_A;
-			end
-		endcase
+		if(mode == 1'b1) begin
+			case(select)
+				2'b00: begin
+					startTimeSecTemp <= startTimeSec_A;
+					startTimeMinTemp <= startTimeMin_A;
+				end
+				2'b01: begin
+					startTimeSecTemp <= startTimeSec_B;
+					startTimeMinTemp <= startTimeMin_B;
+				end
+				2'b10: begin
+					startTimeSecTemp <= startTimeSec_C;
+					startTimeMinTemp <= startTimeMin_C;
+				end
+				default: begin
+					startTimeSecTemp <= startTimeSec_A;
+					startTimeMinTemp <= startTimeMin_A;
+				end
+			endcase
+		end
+		else if(mode2 == 1'b1) begin
+			case(select)
+				2'b00: begin
+					startTimeSecTemp <= blinkStartTimeSec_A;
+					startTimeMinTemp <= blinkStartTimeMin_A;
+				end
+				2'b01: begin
+					startTimeSecTemp <= blinkStartTimeSec_B;
+					startTimeMinTemp <= blinkStartTimeMin_B;
+				end
+				2'b10: begin
+					startTimeSecTemp <= blinkStartTimeSec_C;
+					startTimeMinTemp <= blinkStartTimeMin_C;
+				end
+				default: begin
+					startTimeSecTemp <= blinkStartTimeSec_A;
+					startTimeMinTemp <= blinkStartTimeMin_A;
+				end
+			endcase
+		end
 	end
 	
 	MC_DigitalClock_Separator sec_SEP(startTimeSecTemp, sec10, sec1);

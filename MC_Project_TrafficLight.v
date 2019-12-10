@@ -4,12 +4,12 @@ module MC_Project_TrafficLight(Clock, ResetN,
 											LCD_E, LCD_RS, LCD_RW, LCD_DATA,	//Vehicle Traffic Light (차량용 신호등)
 											PTL_A, PTL_B, PTL_C, SEG_COM, SEG_DATA, PIEZO, PIEZO_onOff, 	//Pedestrian Traffic Light (보행자 신호등)
 											POS, POS_LED, 
-											STsecUp, STsecDown, STminUp, STminDown, mode, select, orangeFlickering, redFlickering);
+											STsecUp, STsecDown, STminUp, STminDown, mode, mode2, select, orangeFlickering, redFlickering);
 	input Clock, ResetN;
 	input PIEZO_onOff;
 	input POS;		//pedestrian operation signal, B 신호등에 부착됨, Button switch 2
 	input STsecUp, STsecDown, STminUp, STminDown;		//count down 시작 시간 조정
-	input mode, orangeFlickering, redFlickering;
+	input mode, mode2, orangeFlickering, redFlickering;
 	input [1:0] select;
 	
 	output [1:0] PTL_A, PTL_B, PTL_C;	//Pedestrian Traffic Light (보행자 신호등)
@@ -43,7 +43,9 @@ module MC_Project_TrafficLight(Clock, ResetN,
 	reg [17:0] CNT;
 	
 	wire [5:0] startTimeSec_A, startTimeMin_A, startTimeSec_B, startTimeMin_B, startTimeSec_C, startTimeMin_C;	//신호등 count down 시작 시간
+	wire [5:0] blinkStartTimeSec_A, blinkStartTimeMin_A, blinkStartTimeSec_B, blinkStartTimeMin_B, blinkStartTimeSec_C, blinkStartTimeMin_C;	//신호등 blink 시작 시간
 	wire [17:0] startTimeMultiply100_A, startTimeMultiply100_B, startTimeMultiply100_C;				//신호등 count down 시작 시간 * 100
+	wire [17:0] blinkStartTimeMultiply100_A, blinkStartTimeMultiply100_B, blinkStartTimeMultiply100_C;				//신호등 blink시작 시간 * 100
 	wire POS_flag;
 	
 	always @(posedge Clock or negedge ResetN)
@@ -84,7 +86,7 @@ module MC_Project_TrafficLight(Clock, ResetN,
 						3'b001: state <= ALL_RED;
 						default: state <= state <= (CNT >= startTimeMultiply100_A) ? B_STATE : A_STATE;	//CNT >= 499
 					endcase*/
-					if(mode == 1'b1)
+					if(mode == 1'b1 || mode2 == 1'b1)
 						state <= EXTINGUISH_ALL_A;
 					else if(orangeFlickering == 1'b1)
 						state <= ALL_ORANGE;
@@ -101,7 +103,7 @@ module MC_Project_TrafficLight(Clock, ResetN,
 						3'b001: state <= ALL_RED;
 						default: state <= (CNT >= startTimeMultiply100_B) ? (POS_flag == 1'b1 ? A_STATE : C_STATE) : B_STATE;
 					endcase*/
-					if(mode == 1'b1)
+					if(mode == 1'b1 || mode2 == 1'b1)
 						state <= EXTINGUISH_ALL_A;
 					else if(orangeFlickering == 1'b1)
 						state <= ALL_ORANGE;
@@ -118,7 +120,7 @@ module MC_Project_TrafficLight(Clock, ResetN,
 						3'b001: state <= ALL_RED;
 						default: state <= (CNT >= startTimeMultiply100_C) ? (POS_LED == 1'b1 ? B_STATE : A_STATE) : C_STATE;	//보행자 작동 신호 있을 때, B로 아니면 A로
 					endcase*/
-					if(mode == 1'b1)
+					if(mode == 1'b1 || mode2 == 1'b1)
 						state <= EXTINGUISH_ALL_A;
 					else if(orangeFlickering == 1'b1)
 						state <= ALL_ORANGE;
@@ -127,7 +129,7 @@ module MC_Project_TrafficLight(Clock, ResetN,
 					else
 						state <= (CNT >= startTimeMultiply100_C) ? (POS_LED == 1'b1 ? B_STATE : A_STATE) : C_STATE;	//보행자 작동 신호 있을 때, B로 아니면 A로
 				end
-				ADJUSTMENT				: state <= (mode == 1'b0) ? DISP_ONOFF : ADJUSTMENT;
+				ADJUSTMENT				: state <= (mode == 1'b0 && mode2 == 1'b0) ? DISP_ONOFF : ADJUSTMENT;
 				ALL_ORANGE				: state <= (CNT == 98) ? EXTINGUISH_ALL_O : ((orangeFlickering == 1'b0) ? DISP_ONOFF : ALL_ORANGE);
 				ALL_RED					: state <= (CNT == 98) ? EXTINGUISH_ALL_R : ((redFlickering == 1'b0) ? DISP_ONOFF : ALL_RED);
 				EXTINGUISH_ALL_O		: state <= (CNT == 98) ? ALL_ORANGE : ((orangeFlickering == 1'b0) ? DISP_ONOFF : EXTINGUISH_ALL_O);
@@ -162,13 +164,18 @@ module MC_Project_TrafficLight(Clock, ResetN,
 		end
 	end
 	
-	MC_AdjustInitialTime AIT(Clock, ResetN, startTimeSec_A, startTimeMin_A, startTimeSec_B, startTimeMin_B, 
+	MC_AdjustInitialTime AIT(Clock, ResetN, mode, mode2, startTimeSec_A, startTimeMin_A, startTimeSec_B, startTimeMin_B, 
 										startTimeSec_C, startTimeMin_C, startTimeMultiply100_A, startTimeMultiply100_B, startTimeMultiply100_C, 
+										blinkStartTimeSec_A, blinkStartTimeMin_A, blinkStartTimeSec_B, blinkStartTimeMin_B, 
+										blinkStartTimeSec_C, blinkStartTimeMin_C, blinkStartTimeMultiply100_A, blinkStartTimeMultiply100_B, blinkStartTimeMultiply100_C, 
 										STsecUp, STsecDown, STminUp, STminDown, select);
 	MC_VehicleTrafficLight VTL(CLK_100Hz, Clock, ResetN, LCD_E, LCD_RS, LCD_RW, LCD_DATA, state, CNT, startTimeSec_A, startTimeMin_A, 
-										startTimeSec_B, startTimeMin_B, startTimeSec_C, startTimeMin_C, startTimeMultiply100_A, startTimeMultiply100_B, startTimeMultiply100_C, select);
+										startTimeSec_B, startTimeMin_B, startTimeSec_C, startTimeMin_C, startTimeMultiply100_A, startTimeMultiply100_B, startTimeMultiply100_C, select, mode, mode2, 
+										blinkStartTimeSec_A, blinkStartTimeMin_A, blinkStartTimeSec_B, blinkStartTimeMin_B, blinkStartTimeSec_C, blinkStartTimeMin_C);
 	MC_PedestrianTrafficLight PTL(Clock, CLK_100Hz, ResetN, state, CNT, startTimeSec_A, startTimeMin_A, 
-											startTimeSec_B, startTimeMin_B, startTimeSec_C, startTimeMin_C, PTL_A, PTL_B, PTL_C, SEG_COM, SEG_DATA, PIEZO, PIEZO_onOff, POS, POS_LED, POS_flag);
+											startTimeSec_B, startTimeMin_B, startTimeSec_C, startTimeMin_C, 
+											blinkStartTimeMultiply100_A, blinkStartTimeMultiply100_B, blinkStartTimeMultiply100_C, 
+											PTL_A, PTL_B, PTL_C, SEG_COM, SEG_DATA, PIEZO, PIEZO_onOff, POS, POS_LED, POS_flag);
 	//MC_Clock(Clock, ResetN, sec);
 	
 endmodule
